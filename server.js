@@ -16,8 +16,8 @@ var passport = require('./services/passport');
 
 // POLICIES //
 var isAuthed = function(req, res, next) {
-  if (!req.isAuthenticated()) return res.sendStatus(401);
-  return next();
+	if (!req.isAuthenticated()) return res.sendStatus(401);
+	return next();
 };
 
 
@@ -26,9 +26,9 @@ var app = express();
 
 app.use(bodyParser.json());
 app.use(session({
-  secret: 'gweriwrb-erfawrg45-oasWsd',
-  saveUninitialized: true,
-  resave: true
+	secret: 'gweriwrb-erfawrg45-oasWsd',
+	saveUninitialized: true,
+	resave: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -38,11 +38,11 @@ app.get('/user', isAuthed, UserCtrl.me);
 app.put('/user', isAuthed, UserCtrl.update);
 
 app.post('/login', passport.authenticate('local', {
-  successRedirect: '/user'
+	successRedirect: '/user'
 }));
 app.get('/logout', function(req, res) {
-  req.logout();
-  return res.send('logged out');
+	req.logout();
+	return res.send('logged out');
 });
 
 
@@ -52,9 +52,9 @@ var port = config.PORT;
 
 mongoose.connect(mongoURI);
 mongoose.connection.once('open', function() {
-  console.log('Connected to Mongo DB at', mongoURI);
+	console.log('Connected to Mongo DB at', mongoURI);
 });
 
 app.listen(port, function() {
-  console.log('Listening on port '+ port);
+	console.log('Listening on port '+ port);
 });
